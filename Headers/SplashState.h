@@ -21,6 +21,7 @@ namespace EdgarSam
         GameDataPtr _data;
         sf::Clock _clock;
         sf::Sprite _background;
+        sf::Text _Instruction;
     };
 }
 #endif

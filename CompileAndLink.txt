@@ -3,8 +3,6 @@ g++ -c AssetLibrary.cpp StateManager.cpp InputManager.cpp Game.cpp SplashState.c
 
 g++ AssetLibrary.o StateManager.o Game.o InputManager.o SplashState.o MenuState.o GameState.o main.o -o app -L C:\SFML-2.6.0\lib -lsfml-graphics -lsfml-window -lsfml-system
 ////////////////////////////////////////////////////////////////////////////////////////////
-g++ -I C:\Users\samnt\Desktop\Directories_2023\SFML-2.6.0\include -I C:\Users\samnt\projects\Project\Project-Refactor\Headers -c AssetLibrary.cpp StateManager.cpp InputManager.cpp Game.cpp SplashState.cpp MenuState.cpp GameState.cpp Space.cpp SpaceShip.cpp Lasers.cpp Asteroid.cpp Lander.cpp GameOverState.cpp main.cpp 
+g++ -I C:\Users\samnt\Desktop\Directories_2023\SFML-2.6.0\include -I C:\Users\samnt\projects\Project\Project-Refactor\Headers -c AssetLibrary.cpp StateManager.cpp InputManager.cpp Game.cpp SplashState.cpp MenuState.cpp GameState.cpp Space.cpp SpaceShip.cpp Lasers.cpp Asteroid.cpp Lander.cpp GameOverState.cpp main.cpp score.cpp
 
-g++ AssetLibrary.o StateManager.o Game.o InputManager.o SplashState.o MenuState.o GameState.o Space.o SpaceShip.o Asteroid.o Lasers.o Lander.o GameOverState.o main.o  -o myapp -L C:\Users\samnt\Desktop\Directories_2023\SFML-2.6.0\lib -lsfml-graphics -lsfml-window -lsfml-system
-
-
+g++ AssetLibrary.o StateManager.o Game.o InputManager.o SplashState.o MenuState.o GameState.o Space.o SpaceShip.o Asteroid.o Lasers.o Lander.o GameOverState.o main.o score.o -o myapp -L C:\Users\samnt\Desktop\Directories_2023\SFML-2.6.0\lib -lsfml-graphics -lsfml-window -lsfml-system

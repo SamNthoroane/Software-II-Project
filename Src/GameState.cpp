@@ -7,6 +7,7 @@ namespace EdgarSam
 {
     GameState::GameState(GameDataPtr data) : _data(data)
     {
+        
     }
     GameState::~GameState()
     {
@@ -28,9 +29,16 @@ namespace EdgarSam
     void GameState::InitState()
     {
         // OBJECT
+        this->score = new Score( _data );
+        gamescore = 0;
+        highscore =gamescore;
+        this->score->UpdateScore(gamescore); 
+
         this->spaceShip = new SpaceShip(_data);
         this->space = new Space(_data);
     }
+
+    
     void GameState::HandleInput()
     {
         sf::Event event;
@@ -51,8 +59,6 @@ namespace EdgarSam
         }
     }
 
-    //Shoot missile? Has to be implemented within the spawning of Landers
-
     void GameState::InitAsteroid()
     {
         if (this->clock_1.getElapsedTime().asSeconds() > ASTERIOD_SPAWNTIME)
@@ -66,11 +72,10 @@ namespace EdgarSam
         if (this->clock_2.getElapsedTime().asSeconds() > LANDER_SPAWNTIME && landers.size() < LANDER_COUNT)
         {
             landers.push_back(new Lander(_data));
-            //launch missile
             this->clock_2.restart();
         }
     }
-
+//To stop laser from going out of boarder
     void GameState::UpdateLaser(float dt)
     {
         for (unsigned int counter = 0; counter < lasers.size(); counter++)
@@ -82,10 +87,9 @@ namespace EdgarSam
                 lasers.erase(lasers.begin() + counter);
             }
         }
-        std::cout << "sizeLaser: " << lasers.size() << std::endl;
+       // std::cout << "sizeLaser: " << lasers.size() << std::endl;
     }
     
-    //Need an update for missile?
 
     void GameState::UpdateLander(float dt)
     {
@@ -93,8 +97,9 @@ namespace EdgarSam
         {
             landers[counter]->update(dt);
         }
-        std::cout << "sizelanders: " << landers.size() << std::endl;
+        //std::cout << "sizelanders: " << landers.size() << std::endl;
     }
+
 
     void GameState::LaserAsteroidCollision()
     {
@@ -135,10 +140,15 @@ namespace EdgarSam
                     lasers.erase(lasers.begin() + k);
                     landers.erase(landers.begin() + i);
                     lander_removed = true;
-                }
+                    gamescore++;
+                    this->score->UpdateScore(gamescore); 
+                    this->score->UpdateHighScore(gamescore,highscore);  
+               }              
             }
         }
     }
+
+    
 
     void GameState::shipAsteroidCollision()
     {
@@ -170,15 +180,15 @@ namespace EdgarSam
                 asteroids.erase(asteroids.begin() + counter);
             }
         }
-        std::cout << "sizeAsteroid: " << asteroids.size() << std::endl
-                  << std::endl;
+        //std::cout << "sizeAsteroid: " << asteroids.size() << std::endl
+                  //<< std::endl;
     }
     void GameState::checkCollision()
     {
         this->LaserAsteroidCollision();
         this->LaserLanderCollision();
         this->shipAsteroidCollision();
-        //Need to check missile collision
+        
     }
     void GameState::Update(float dt)
     {
@@ -191,6 +201,7 @@ namespace EdgarSam
         this->UpdateAsteroid(dt);
         this->UpdateLander(dt);
         this->checkCollision();
+
     }
 
     void GameState::Draw(float dt)
@@ -198,6 +209,7 @@ namespace EdgarSam
         _data->window.clear();
         this->space->draw();
         this->spaceShip->draw();
+        
         for (auto *laser : lasers)
         {
             laser->draw();
@@ -210,6 +222,7 @@ namespace EdgarSam
         {
             lander->draw();
         }
+        this->score->draw();
         _data->window.display();
     }
 }

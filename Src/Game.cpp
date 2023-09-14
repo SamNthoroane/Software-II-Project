@@ -12,6 +12,7 @@ namespace EdgarSam
         _data->window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), GAME_TITLE, sf::Style::Close | sf::Style::Titlebar);
         _data->states.PushState(std::unique_ptr<State>(new SplashState(this->_data)));
         this->Run();
+        
     }
 
     void Game::Run()

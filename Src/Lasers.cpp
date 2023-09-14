@@ -13,7 +13,7 @@ namespace EdgarSam
         _laser.setTexture(_data->assets.getTexture("lasers"));
         _laser.setPosition(position);
         _laser.setScale(0.30f, 0.50f);
-        // This where you'll need to find the position of the ship
+        
         if (right_Dir)
         {
             direction = sf::Vector2f(1.0f, 0.0f); // Flip the sprite to face right

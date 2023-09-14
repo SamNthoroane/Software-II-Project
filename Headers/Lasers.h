@@ -1,8 +1,6 @@
 #ifndef LASERS_H
 #define LASERS_H
 
-
-
 #include "StateManager.h"
 #include "InputManager.h"
 #include "Game.h"
@@ -15,7 +13,7 @@ namespace EdgarSam
     class Lasers
     {
     public:
-        Lasers(GameDataPtr data, sf::Vector2f position, bool right_Dir);
+        Lasers(GameDataPtr data, sf::Vector2f position, bool right_Dir, bool isShip = true);
         ~Lasers(){};
         void SpawnLasers(sf::Vector2f position, bool right_Dir);
         void Update(float dt);
@@ -26,9 +24,10 @@ namespace EdgarSam
     private:
         GameDataPtr _data;
         sf::Sprite _laser;
+        sf::Sprite _laser_1;
         sf::Vector2f direction;
-        std::vector<sf::Sprite>
-            _laserSprites;
+        bool _isShip;
+        bool _isLander;
     };
 }
 #endif

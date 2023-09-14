@@ -15,6 +15,14 @@ namespace EdgarSam
         _background.setTexture(_data->assets.getTexture("splashbackground"));
         _background.setScale(sf::Vector2f(1.0f, 0.7777778f));
 
+        this->_data->assets.AddFont("InstructionFont", MAINMENU_FONT);
+        //Setting the font
+        this->_Instruction.setFont(_data->assets.getFont("InstructionFont"));
+        this->_Instruction.setString("Right Click Mouse to Shoot and Arrows to Move");
+        this->_Instruction.setCharacterSize(15);
+        this->_Instruction.setFillColor(sf::Color::Yellow);
+        this->_Instruction.setPosition(_data->window.getSize().x/10,_data->window.getSize().y/2);
+
         this->_clock.restart();
     }
 
@@ -41,6 +49,7 @@ namespace EdgarSam
     {
         _data->window.clear();
         _data->window.draw(_background);
+        _data->window.draw(_Instruction);
         _data->window.display();
     }
 
